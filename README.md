@@ -1,11 +1,11 @@
-# Docker
+FROM golang:1.8-alpine
 
-## docker build
-docker build -t slackbot .
+WORKDIR /go/src/basic-go-server
+COPY . .
 
-## docker run
-docker run -p 8080:8080 -d --rm slackbot
+RUN go-wrapper download
+RUN go-wrapper install
 
-## docker stop
-docker stop {container id}
+EXPOSE 8080
 
+CMD ["go-wrapper", "run"]
